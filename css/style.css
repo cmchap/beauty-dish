@@ -103,10 +103,3 @@ input[type=range]::-moz-range-thumb {
 .hidden {
 	display: none;
 }
-
-#footer {
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-	text-align: center;
-}
