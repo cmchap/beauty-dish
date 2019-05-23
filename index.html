@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Beauty Dish</title>
+		<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<script src="js/chroma.min.js"></script>
+
+<div id="dish"></div>
+<div id="picker">
+	<h3>💡️ Video Conference Beauty Dish 💡️</h3>
+	<h5>Maximize Window 🖥️</h5>
+	<h5>Brightness ➡️ 100%</h5>
+	<br>
+	<p><label for="slider">Color temperature: <span id="output"></span>K</label></p>
+	<input type="range" id="slider" name="volume" min="3000" max="8000">
+	<p><a id="toggleAdvanced" href="#">Show/Hide Advanced Options</a></p>
+	<div id="advanced" class="hidden">
+		<br>
+		<p>Write your own <a href="https://vis4.net/chromajs/" target="_blank">chroma.js</a> code to set the color</p>
+		<textarea id="code" placeholder="chroma({ l:80, c:25, h:200 })" rows="3" cols="35">chroma({ l:80, c:25, h:200 })</textarea>
+		<p>Preview: <span id="thumbnail"> </span><span id="code_output"></span></p>
+		<button type="submit" id="submit">Submit</button>
+	</div>
+</div>
+<div id="footer"><p>Short link to this page: <a href="http://tiny.cc/beautydish">http://tiny.cc/beautydish</a></p></div>
+
+<script  src="js/index.js"></script>
+
+</body>
+
+</html>
