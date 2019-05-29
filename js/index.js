@@ -71,7 +71,7 @@ interact('#videoContainer')
     onmove: window.dragMoveListener,
     modifiers: [
       interact.modifiers.restrict({
-        restriction: 'body',
+        restriction: dish,
         elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
       })
     ]
