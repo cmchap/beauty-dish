@@ -9,6 +9,7 @@
 <body>
 
 <script src="js/chroma.min.js"></script>
+<script src="js/interact.min.js"></script>
 
 <div id="dish"></div>
 <div id="picker">
@@ -26,6 +27,11 @@
 		<p>Preview: <span id="thumbnail"> </span><span id="code_output"></span></p>
 		<button type="submit" id="submit">Submit</button>
 	</div>
+</div>
+<button id="webcamPreview">Enable Webcam Preview</button>
+<div id="videoContainer" class="hidden">
+	<button id="resizeWebcamPreview"></button>
+	<video autoplay="true" id="videoElement" ></video>
 </div>
 
 <script  src="js/index.js"></script>

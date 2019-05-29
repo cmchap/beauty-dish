@@ -10,6 +10,8 @@ var code = document.getElementById("code");
 var code_output = document.getElementById("code_output");
 var thumbnail = document.getElementById("thumbnail");
 var submit = document.getElementById("submit");
+var webcamPreview = document.getElementById("webcamPreview");
+
 
 updateColor(slider.value);
 code_output.innerHTML = eval(code.value);
@@ -40,12 +42,97 @@ code.onkeydown = function(e){
 };
 
 submit.onclick = function(){
-	dish.style.backgroundColor = code_output.innerHTML;
+	dish.style.background = thumbnail.style.background;
 	slider.value = (parseInt(slider.min) + parseInt(slider.max))/2;
 	output.innerHTML = "N/A ";
 }
 
+var videoContainer = document.getElementById("videoContainer");
+var video = document.getElementById("videoElement");
+webcamPreview.onclick = function (){
+	if (navigator.mediaDevices.getUserMedia) {
+		navigator.mediaDevices.getUserMedia({ video: true })
+		.then(function (stream) {
+			videoContainer.classList.remove("hidden");
+			webcamPreview.classList.add("hidden");
+			video.srcObject = stream;
+			video.classList.remove("hidden");
+		})
+		.catch(function (err0r) {
+			console.log("Something went wrong with the webcam preview!");
+		});
+	}
+};
 
+window.dragMoveListener = dragMoveListener;
+
+interact('#videoContainer')
+.draggable({
+    onmove: window.dragMoveListener,
+    modifiers: [
+      interact.modifiers.restrict({
+        restriction: 'body',
+        elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
+      })
+    ]
+  })
+  .resizable({
+	preserveAspectRatio: true,
+    edges: {
+		top   : '#resizeWebcamPreview',
+		right : '#resizeWebcamPreview'
+	  },
+    modifiers: [
+      // keep the edges inside the parent
+      interact.modifiers.restrictEdges({
+        outer: 'parent',
+        endOnly: true,
+      }),
+
+      // minimum size
+    //   interact.modifiers.restrictSize({
+	// 	max: { width: "24em", height: "18em" },
+	// 	min: {width: 100, height: 75}
+    //   }),
+    ],
+    inertia: false
+  })
+  .on('resizemove', function (event) {
+    var target = event.target,
+        x = (parseFloat(target.getAttribute('data-x')) || 0),
+        y = (parseFloat(target.getAttribute('data-y')) || 0);
+
+    // update the element's style
+    target.style.width  = event.rect.width + 'px';
+    target.style.height = event.rect.height + 'px';
+
+    // translate when resizing from top or left edges
+    x += event.deltaRect.left;
+    y += event.deltaRect.bottom;
+
+    target.style.webkitTransform = target.style.transform =
+        'translate(' + x + 'px,' + y + 'px)';
+
+    target.setAttribute('data-x', x);
+    target.setAttribute('data-y', y);
+    // target.textContent = Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height);
+  });
+
+  function dragMoveListener (event) {
+    var target = event.target,
+        // keep the dragged position in the data-x/data-y attributes
+        x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+        y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+    // translate the element
+    target.style.webkitTransform =
+    target.style.transform =
+      'translate(' + x + 'px, ' + y + 'px)';
+
+    // update the posiion attributes
+    target.setAttribute('data-x', x);
+    target.setAttribute('data-y', y);
+  }
 
 function updateColor(value) {
 	output.innerHTML = value;
@@ -59,5 +146,5 @@ function sliderReset() {
 }
 
 function updateThumbnail() {
-	thumbnail.style.backgroundColor = code_output.innerHTML;
+	thumbnail.style.background = code_output.innerHTML;
 }
