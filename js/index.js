@@ -54,10 +54,9 @@ webcamPreview.onclick = function (){
     navigator.mediaDevices
     .getUserMedia({ video: {facingMode: 'user'}, audio: false })
 		.then(function(stream) {
-      videoContainer.classList.remove("hidden");
       webcamPreview.classList.add("hidden");
-			video.srcObject = stream;
-			video.classList.remove("hidden");
+      video.srcObject = stream;
+      videoContainer.classList.remove("hidden");
 		})
 		.catch(function (error) {
 			console.log("Something went wrong with the webcam preview: "+ error);
