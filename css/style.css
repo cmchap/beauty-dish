@@ -1,6 +1,7 @@
 #dish
 {
     position: fixed;
+    z-index: -1;
     top: 0;
     left: 0;
 
@@ -18,12 +19,10 @@ body
 
     overflow-x: auto;
     overflow-y: scroll;
-
     /* width: 100vw; */
     /* height: 100vh; */
 
     height: auto;
-
     margin: 0;
     padding: 0;
 }
@@ -39,12 +38,8 @@ button
 
 #picker
 {
-    position: absolute;
-    left: 50%;
+    margin: 1em auto;
 
-    margin: 2em;
-
-    transform: translate(-50%, 0);
     text-align: center;
 }
 
@@ -134,6 +129,7 @@ input[type='range']::-moz-range-thumb
 
 #advanced
 {
+    margin: auto 1em;
     padding: 1em;
 
     border: 2px solid white;
@@ -211,13 +207,13 @@ textarea
     z-index: 999;
     top: -.75em;
     right: -.75em;
-    padding: 0;
-    margin: 0;
 
     display: none;
 
     width: 1.5em;
     height: 1.5em;
+    margin: 0;
+    padding: 0;
 
     transform: rotate(-45deg);
 

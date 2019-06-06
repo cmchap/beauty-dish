@@ -51,15 +51,16 @@ var videoContainer = document.getElementById("videoContainer");
 var video = document.getElementById("videoElement");
 webcamPreview.onclick = function (){
 	if (navigator.mediaDevices.getUserMedia) {
-		navigator.mediaDevices.getUserMedia({ video: true })
-		.then(function (stream) {
-			videoContainer.classList.remove("hidden");
-			webcamPreview.classList.add("hidden");
+    navigator.mediaDevices
+    .getUserMedia({ video: {facingMode: 'user'}, audio: false })
+		.then(function(stream) {
+      videoContainer.classList.remove("hidden");
+      webcamPreview.classList.add("hidden");
 			video.srcObject = stream;
 			video.classList.remove("hidden");
 		})
-		.catch(function (err0r) {
-			console.log("Something went wrong with the webcam preview!");
+		.catch(function (error) {
+			console.log("Something went wrong with the webcam preview: "+ error);
 		});
 	}
 };
@@ -87,13 +88,7 @@ interact('#videoContainer')
       interact.modifiers.restrictEdges({
         outer: 'parent',
         endOnly: true,
-      }),
-
-      // minimum size
-    //   interact.modifiers.restrictSize({
-	// 	max: { width: "24em", height: "18em" },
-	// 	min: {width: 100, height: 75}
-    //   }),
+      })
     ],
     inertia: false
   })
