@@ -129,6 +129,9 @@ input[type='range']::-moz-range-thumb
 
 #advanced
 {
+    display: inline-block;
+    
+    width: fit-content;
     margin: auto 1em;
     padding: 1em;
 
